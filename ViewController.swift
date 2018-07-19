@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+import Alamofire //dependency using Alamofire, helps in http networking in swift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -28,9 +28,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!  //connecting to the view 
     
-    var trackers : [sysIns]? = []
+    var trackers : [sysIns]? = []  //initialise trackers with empty array
     
 
     override func viewDidLoad() {
@@ -44,8 +44,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func fetchData() {
     
         
-        let user = "C5235326"
-        let password = "14Hana94$"
+        let user = "#masked"
+        let password = "#masked"
         
         var headers: HTTPHeaders = [:]
         
@@ -53,7 +53,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             headers[authorizationHeader.key] = authorizationHeader.value
         }
         
-        Manager.request("https://vhmcdbfadb.mcd.rot.hec.sap.biz:4304/iOS_DEVPDT/pdtracker1/XSJSservices/lfcycle.xsjs?cmd=GETPROGRESS", headers: headers)
+        Manager.request("URL", headers: headers)
             .responseJSON { response in
              
             debugPrint(response)
@@ -109,7 +109,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
                 
         }
-    
+    //Connecting the each fetcheted json element to the UI element in the view
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "sysInsCell", for: indexPath) as! sysInsTableViewCell
